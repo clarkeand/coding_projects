@@ -39,6 +39,6 @@ while user_input != "q":
         result = mod(user_input_token[1], user_input_token[2])
     
     else: 
-        total = "Please enter a valid equation."
+        result = "Please enter a valid equation."
 
-    print(total)
+    print(result)
