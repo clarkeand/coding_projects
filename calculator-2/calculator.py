@@ -38,6 +38,9 @@ while user_input != "q":
     elif user_input_token[0] == "mod":
         result = mod(user_input_token[1], user_input_token[2])
     
+    elif user_input_token[0] == "q":
+        continue
+
     else: 
         result = "Please enter a valid equation."
 
