@@ -27,7 +27,7 @@ while user_input != "q":
         result = divide(user_input_token[1], user_input_token[2])
 
     elif user_input_token[0] == "square":
-        result = square[user_input_token[1]]
+        result = square(user_input_token[1])
 
     elif user_input_token[0] == "cube":
         result = cube(user_input_token[1])
