@@ -36,7 +36,8 @@ def make_melon_types():
     
     
     casaba = MelonType("cas", 2003, "orange", False, False, "Casaba")
-    casaba.add_pairing("strawberries", "mint")
+    casaba.add_pairing("strawberries")
+    casaba.add_pairing("mint")
     all_melon_types.append(casaba)
    
     crenshaw = MelonType("cren", 1996, "green", False, False, "Crenshaw")
@@ -61,8 +62,11 @@ def print_pairing_info(melon_types):
 
 def make_melon_type_lookup(melon_types):
     """Takes a list of MelonTypes and returns a dictionary of melon type by code."""
-
-    # Fill in the rest
+    melon_dictionary = {}
+    for melon in melon_types: 
+        melon_dictionary[melon.code] = melon
+    print(melon_dictionary)
+    return melon_dictionary
 
 
 ############
