@@ -2,7 +2,7 @@
 
 from random import choice
 
-from flask import Flask, request
+from flask import Flask, request, redirect
 
 # "__name__" is a special Python variable for the name of the current module
 # Flask wants to know this to know what any imported things are relative to.
@@ -13,12 +13,18 @@ AWESOMENESS = [
     'oh-so-not-meh', 'brilliant', 'ducky', 'coolio', 'incredible',
     'wonderful', 'smashing', 'lovely']
 
+MEANNESS = [
+    'You broke!', 'You are a fat ass!', 'WE ALL SPRING FROM APES BUT YOU DID NOT SPRING FAR ENOUGH.']
+
+COMMENT = ['Comp', 'Dis']
+
 
 @app.route('/')
 def start_here():
     """Home page."""
 
     return """<!doctype html><html><a href="/hello"> Hi! This is the home page.</a></html>"""
+
 
 
 @app.route('/hello')
@@ -33,7 +39,7 @@ def say_hello():
       </head>
       <body>
         <h1>Hi There!</h1>
-        <form action="/greet">
+        <form action="/greet" action="/dis">
           What's your name? <input type="text" name="person">
           <br>
             <label for="compliment-select">Select your compliment:</label>
@@ -67,19 +73,42 @@ def greet_person():
 
     player = request.args.get("person")
 
-    compliment = choice(AWESOMENESS)
+    option = choice(COMMENT)
+
+    if option == 'Comp':
+      compliment = request.args.get("compliment")
+      return f"""
+      <!doctype html>
+      <html>
+        <head>
+          <title>A Compliment</title>
+        </head>
+        <body>
+          Hi, {player}! I think you're {compliment}!
+        </body>
+      </html>
+      """
+    else:
+        return redirect('/dis')
+
+@app.route('/dis')
+def haters_be_hating():
+    doodoo_head = request.args.get("person")
+    # print(f"aaaaaaaaaaaaaaaa  {doodoo_head}")
+    
+    dis = choice(MEANNESS)
 
     return f"""
-    <!doctype html>
-    <html>
-      <head>
-        <title>A Compliment</title>
-      </head>
-      <body>
-        Hi, {player}! I think you're {compliment}!
-      </body>
-    </html>
-    """
+          <!doctype html>
+          <html>
+            <head>
+              <title>A Compliment</title>
+            </head>
+            <body>
+              Psych, {doodoo_head}! {dis}!
+            </body>
+          </html>
+            """
 
 
 if __name__ == '__main__':
